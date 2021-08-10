@@ -1,25 +1,23 @@
 import React from 'react'
+import { WelcomePage } from './pages/WelcomePage'
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from 'react-toastify'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { AppPage } from './pages/AppPage'
 
-import './App.css'
-
-function App() {
+export const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <ToastContainer />
+      <Switch>
+        <Route path={'/'} exact>
+          <WelcomePage />
+        </Route>
+        <Route path={'/app'}>
+          <AppPage />
+        </Route>
+      </Switch>
+    </Router>
   )
 }
 
