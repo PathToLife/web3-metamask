@@ -1,5 +1,5 @@
 import { createTheme, ThemeOptions } from '@material-ui/core'
-import { blue, blueGrey, orange } from '@material-ui/core/colors'
+import { blue, blueGrey, common, orange } from '@material-ui/core/colors'
 import { fontMayaSamuelsExtraLight, fontMayaSamuelsLight } from './font'
 
 export const colorPalette = {
@@ -17,6 +17,9 @@ export const colorPalette = {
   },
   darkGrey: {
     main: '#5C5C5C',
+  },
+  lightGrey: {
+    main: '#F6F6F6',
   },
 }
 
@@ -63,6 +66,9 @@ export const themes = {
     palette: {
       ...themeDefault.palette,
       type: 'light',
+      background: {
+        default: common.white,
+      },
     },
   }),
 }

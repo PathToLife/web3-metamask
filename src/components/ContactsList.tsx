@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useMemo } from 'react'
 import {
   Avatar,
   List,
@@ -12,6 +12,7 @@ import { colorPalette } from '../styles/theme'
 import AddIcon from '@material-ui/icons/Add'
 import { useHistory } from 'react-router-dom'
 import { routePaths } from '../pages/Router'
+import { AppContext, IContact } from '../context/AppContext'
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -37,15 +38,43 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const ListItemContact: React.FC = () => {
+interface ListItemContactProps {
+  index: number
+  contact: IContact
+}
+
+const ListItemContact: React.FC<ListItemContactProps> = ({
+  index,
+  contact,
+}) => {
   const classes = useStyles()
+
+  const initials = useMemo(() => {
+    const words = contact.name.split(' ')
+    const cleanedWords = words.filter((w) => w.trim().length)
+
+    if (cleanedWords.length === 0) {
+      return '?'
+    }
+
+    if (cleanedWords.length === 1) {
+      return cleanedWords[0].slice(0, 2).toUpperCase()
+    }
+
+    const [firstName, lastName] = cleanedWords
+
+    return (
+      firstName.slice(0, 1).toUpperCase() + lastName.slice(0, 1).toUpperCase()
+    )
+  }, [contact.name])
+
   return (
     <ListItem button className={classes.listItem}>
       <ListItemAvatar>
-        <Avatar className={classes.avatar}>TC</Avatar>
+        <Avatar className={classes.avatar}>{initials}</Avatar>
       </ListItemAvatar>
       <ListItemText>
-        <Typography variant={'subtitle1'}>Test Contact</Typography>
+        <Typography variant={'subtitle1'}>{contact.name}</Typography>
       </ListItemText>
     </ListItem>
   )
@@ -74,13 +103,15 @@ const ListItemAddContact: React.FC = () => {
 
 const ContactsList: React.FC = () => {
   const classes = useStyles()
+  const { contactsModule } = useContext(AppContext)
   return (
     <List className={classes.list}>
       <ListItemAddContact />
-      <ListItemContact />
-      <ListItemContact />
-      <ListItemContact />
-      <ListItemContact />
+      {contactsModule.contactsList.map((contact, i) => {
+        return (
+          <ListItemContact key={`contact-${i}`} index={i} contact={contact} />
+        )
+      })}
     </List>
   )
 }

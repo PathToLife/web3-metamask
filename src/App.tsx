@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useReducer } from 'react'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
 import { themes } from './styles/theme'
 import { CssBaseline, ThemeProvider } from '@material-ui/core'
-import { AppContext } from './context/AppContext'
+import { AppContext, useContacts } from './context/AppContext'
 import ErrorNotifications from './components/ErrorNotifications'
 import AppRouter from './pages/Router'
 
@@ -18,24 +18,24 @@ const AppContextThemeProvider: React.FC = ({ children }) => {
 }
 
 const App: React.FC = () => {
-  const [theme, setTheme] = useState(themes.light)
-
-  const changeTheme = (type: string) => {
+  const [theme, setTheme] = useReducer((_: any, type: string) => {
     switch (type) {
       case 'dark':
-        setTheme(themes.dark)
-        break
+        return themes.dark
       case 'light':
       default:
-        setTheme(themes.light)
+        return themes.light
     }
-  }
+  }, themes.light)
+
+  const contacts = useContacts()
 
   return (
     <AppContext.Provider
       value={{
         theme: theme,
-        setTheme: (type) => changeTheme(type),
+        setTheme: (type) => setTheme(type),
+        contactsModule: contacts,
       }}
     >
       <AppContextThemeProvider>

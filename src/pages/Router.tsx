@@ -11,6 +11,7 @@ import AddressBookPage from './Contacts/AddressBookPage'
 import ContactAddPage from './Contacts/ContactAddPage'
 
 export const routePaths = {
+  welcome: '/',
   contacts: {
     list: '/contacts/list',
     new: '/contact/new',
