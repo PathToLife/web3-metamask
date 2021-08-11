@@ -9,6 +9,8 @@ import WelcomePage from './WelcomePage'
 import TestPage from './TestPage'
 import AddressBookPage from './Contacts/AddressBookPage'
 import ContactAddPage from './Contacts/ContactAddPage'
+import ContactEditPage from './Contacts/ContactEditPage'
+import ContactSendValuePage from './Contacts/ContactSendValuePage'
 
 export const routePaths = {
   welcome: '/',
@@ -35,6 +37,12 @@ const AppRouter: React.FC = () => {
         </Route>
         <Route exact path={routePaths.contacts.new}>
           <ContactAddPage />
+        </Route>
+        <Route path={routePaths.contacts.send + '/:id'}>
+          <ContactSendValuePage />
+        </Route>
+        <Route path={routePaths.contacts.edit + '/:id'}>
+          <ContactEditPage />
         </Route>
         <Route exact path={'*'}>
           <Redirect to={'/'} />

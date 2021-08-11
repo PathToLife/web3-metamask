@@ -3,11 +3,11 @@ import { useWeb3React } from '@web3-react/core'
 import { Button, makeStyles, Typography } from '@material-ui/core'
 import Web3 from 'web3'
 import PageContainer from '../components/layout/PageContainer'
-import { useWeb3Loader } from '../web3/injector-connector'
 import LoadingPanel from '../components/LoadingPanel'
 import { PrimaryButton, SecondaryButton } from '../components/Buttons'
-import { StyledTextField } from '../components/TextInput'
-import { useMetaMaskEncryption } from '../web3/encryptionDecryption'
+import { StyledTextField } from '../components/StyledTextField'
+import { useWeb3Loader } from '../hooks/useWeb3Loader'
+import { useMetaMaskEncryption } from '../hooks/useMetaMaskEncryption'
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -41,11 +41,11 @@ const TestPage: React.FC = () => {
 
   const handleEncrypt = () => {
     if (!encryptionPublicKey) return
-    setText(encrypt(text))
+    encrypt(text).then((result) => setText(result))
   }
 
   const handleDecrypt = () => {
-    decrypt(text).then((result: string) => setText(result))
+    decrypt(text).then((result) => setText(result))
   }
 
   return (

@@ -3,9 +3,10 @@ import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
 import { themes } from './styles/theme'
 import { CssBaseline, ThemeProvider } from '@material-ui/core'
-import { AppContext, useContacts } from './context/AppContext'
+import { useContacts } from './hooks/useContacts'
 import ErrorNotifications from './components/ErrorNotifications'
 import AppRouter from './pages/Router'
+import AppContext from './context/AppContext'
 
 const AppContextThemeProvider: React.FC = ({ children }) => {
   return (

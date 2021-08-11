@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react'
+import React, { useContext } from 'react'
 import {
   Avatar,
   List,
@@ -12,7 +12,9 @@ import { colorPalette } from '../styles/theme'
 import AddIcon from '@material-ui/icons/Add'
 import { useHistory } from 'react-router-dom'
 import { routePaths } from '../pages/Router'
-import { AppContext, IContact } from '../context/AppContext'
+import AppContext, { IContact } from '../context/AppContext'
+import StyledAvatar from './StyledAvatar'
+import { useInitials } from '../hooks/useInitials'
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -23,8 +25,6 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: 0,
   },
   avatar: {
-    backgroundColor: colorPalette.blueGrey.main,
-    color: theme.palette.common.white,
     fontSize: '1em',
     width: 40,
     height: 40,
@@ -48,30 +48,18 @@ const ListItemContact: React.FC<ListItemContactProps> = ({
   contact,
 }) => {
   const classes = useStyles()
+  const history = useHistory()
 
-  const initials = useMemo(() => {
-    const words = contact.name.split(' ')
-    const cleanedWords = words.filter((w) => w.trim().length)
+  const initials = useInitials(contact.name)
 
-    if (cleanedWords.length === 0) {
-      return '?'
-    }
-
-    if (cleanedWords.length === 1) {
-      return cleanedWords[0].slice(0, 2).toUpperCase()
-    }
-
-    const [firstName, lastName] = cleanedWords
-
-    return (
-      firstName.slice(0, 1).toUpperCase() + lastName.slice(0, 1).toUpperCase()
-    )
-  }, [contact.name])
+  const handleClick = () => {
+    history.push(routePaths.contacts.send + '/' + index)
+  }
 
   return (
-    <ListItem button className={classes.listItem}>
+    <ListItem button className={classes.listItem} onClick={handleClick}>
       <ListItemAvatar>
-        <Avatar className={classes.avatar}>{initials}</Avatar>
+        <StyledAvatar className={classes.avatar}>{initials}</StyledAvatar>
       </ListItemAvatar>
       <ListItemText>
         <Typography variant={'subtitle1'}>{contact.name}</Typography>

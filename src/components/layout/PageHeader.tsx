@@ -23,14 +23,14 @@ const useStyles = makeStyles(() => ({
 interface PageHeaderProps {
   onBack: () => void
   title: string
-  rightSize?: JSX.Element
+  rightSide?: JSX.Element
   className?: string
 }
 
 export const PageHeader: React.FC<PageHeaderProps> = ({
   onBack,
   title,
-  rightSize,
+  rightSide,
   className,
 }) => {
   const classes = useStyles()
@@ -46,7 +46,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
       <Typography variant={'subtitle1'} className={classes.title}>
         {title}
       </Typography>
-      <div className={classes.rightSizeContainer}>{rightSize}</div>
+      <div className={classes.rightSizeContainer}>{rightSide}</div>
     </div>
   )
 }

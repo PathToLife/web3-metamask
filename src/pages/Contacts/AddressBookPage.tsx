@@ -6,14 +6,14 @@ import ContactsList from '../../components/ContactsList'
 import { SecondaryButton } from '../../components/Buttons'
 import { useWeb3React } from '@web3-react/core'
 import Web3 from 'web3'
-import { useWeb3Loader } from '../../web3/injector-connector'
 import LoadingPanel from '../../components/LoadingPanel'
+import { useWeb3Loader } from '../../hooks/useWeb3Loader'
 
 const AddressBookPage: React.FC = () => {
+  const { isLoading } = useWeb3Loader(true)
+
   const history = useHistory()
   const { deactivate } = useWeb3React<Web3>()
-
-  const { isLoading } = useWeb3Loader(true)
 
   const handleBack = () => {
     history.push('/')
