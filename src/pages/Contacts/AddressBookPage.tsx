@@ -6,6 +6,7 @@ import ContactsList from '../../components/ContactsList'
 import { SecondaryButton } from '../../components/Buttons'
 import { useWeb3React } from '@web3-react/core'
 import Web3 from 'web3'
+import { routePaths } from '../Router'
 
 const AddressBookPage: React.FC = () => {
   const history = useHistory()
@@ -30,7 +31,7 @@ const AddressBookPage: React.FC = () => {
     <PageContainer>
       <PageHeader onBack={handleBack} title={'Address Book'} />
       <ContactsList />
-      <SecondaryButton onClick={handleDeactivate}>Deactivate</SecondaryButton>
+      <SecondaryButton onClick={handleDeactivate}>Disconnect</SecondaryButton>
     </PageContainer>
   )
 }

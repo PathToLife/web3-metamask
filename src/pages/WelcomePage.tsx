@@ -7,6 +7,7 @@ import Web3 from 'web3'
 import { MainButton } from '../components/Buttons'
 import PageContainer from '../components/layout/PageContainer'
 import LoadingPanel from '../components/LoadingPanel'
+import { routePaths } from './Router'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -24,8 +25,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const redirectPathOnConnect = '/list'
-
 const WelcomePage: React.FC = () => {
   const classes = useStyles()
 
@@ -37,13 +36,13 @@ const WelcomePage: React.FC = () => {
 
   useEffect(() => {
     if (active && redirectOnSuccess) {
-      history.push(redirectPathOnConnect)
+      history.push(routePaths.contacts.list)
     }
   }, [history, active, redirectOnSuccess])
 
   const handleStart = () => {
     if (active) {
-      history.push(redirectPathOnConnect)
+      history.push(routePaths.contacts.list)
       return
     }
     setLoading(true)

@@ -10,6 +10,8 @@ import {
 } from '@material-ui/core'
 import { colorPalette } from '../styles/theme'
 import AddIcon from '@material-ui/icons/Add'
+import { useHistory } from 'react-router-dom'
+import { routePaths } from '../pages/Router'
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -51,8 +53,13 @@ const ListItemContact: React.FC = () => {
 
 const ListItemAddContact: React.FC = () => {
   const classes = useStyles()
+  const history = useHistory()
+
+  const handleAdd = () => {
+    history.push(routePaths.contacts.new)
+  }
   return (
-    <ListItem button className={classes.listItem}>
+    <ListItem button className={classes.listItem} onClick={handleAdd}>
       <ListItemAvatar>
         <Avatar className={classes.iconButton}>
           <AddIcon />
