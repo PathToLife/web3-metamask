@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 interface LoadingPanelProps {
   isLoading: boolean
-  message: string
+  message?: string
 }
 
 const LoadingPanel: React.FC<LoadingPanelProps> = ({
@@ -70,7 +70,7 @@ const LoadingPanel: React.FC<LoadingPanelProps> = ({
       <div className={classes.messageContainer}>
         <div className={classes.threeDots} />
         <Typography variant={'body1'} className={classes.message}>
-          {message}
+          {message ? message : 'loading'}
         </Typography>
         <Typography variant={'body1'} className={classes.threeDots}>
           {threeDots}
