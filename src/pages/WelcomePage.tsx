@@ -53,7 +53,7 @@ const WelcomePage: React.FC = () => {
   return (
     <PageContainer className={classes.container}>
       <img
-        src={'/images/metamask-fox.svg'}
+        src={process.env.PUBLIC_URL + '/images/metamask-fox.svg'}
         alt={'logo'}
         className={classes.logo}
       />

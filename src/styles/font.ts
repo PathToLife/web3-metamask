@@ -5,7 +5,7 @@ export const fontMayaSamuelsExtraLight = {
   fontWeight: 400,
   src: `
     local('MayaSamuels-ExtraLight'),
-    url('/fonts/maya-samuels-extralight.ttf') format('truetype')
+    url('${process.env.PUBLIC_URL}/fonts/maya-samuels-extralight.ttf') format('truetype')
   `,
 }
 
@@ -16,6 +16,6 @@ export const fontMayaSamuelsLight = {
   fontWeight: 400,
   src: `
     local('MayaSamuels-Light'),
-    url('/fonts/maya-samuels-light.ttf') format('truetype')
+    url('${process.env.PUBLIC_URL}/fonts/maya-samuels-light.ttf') format('truetype')
   `,
 }
