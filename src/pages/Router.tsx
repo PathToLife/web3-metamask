@@ -12,13 +12,15 @@ import ContactAddPage from './Contacts/ContactAddPage'
 import ContactEditPage from './Contacts/ContactEditPage'
 import ContactSendValuePage from './Contacts/ContactSendValuePage'
 
+const root = process.env.PUBLIC_URL
 export const routePaths = {
-  welcome: '/',
+  welcome: root + '/',
+  test: root + '/test',
   contacts: {
-    list: '/contacts/list',
-    new: '/contact/new',
-    send: '/contact/send',
-    edit: '/contacts/edit',
+    list: root + '/contacts/list',
+    new: root + '/contact/new',
+    send: root + '/contact/send',
+    edit: root + '/contacts/edit',
   },
 }
 
@@ -26,10 +28,10 @@ const AppRouter: React.FC = () => {
   return (
     <Router>
       <Switch>
-        <Route exact path={'/'}>
+        <Route exact path={root}>
           <WelcomePage />
         </Route>
-        <Route path={'/test'}>
+        <Route path={routePaths.test}>
           <TestPage />
         </Route>
         <Route exact path={routePaths.contacts.list}>
@@ -45,7 +47,7 @@ const AppRouter: React.FC = () => {
           <ContactEditPage />
         </Route>
         <Route exact path={'*'}>
-          <Redirect to={'/'} />
+          <Redirect to={root} />
         </Route>
       </Switch>
     </Router>
