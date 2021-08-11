@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { makeStyles, Typography } from '@material-ui/core'
 import { useHistory } from 'react-router'
 import { useWeb3React } from '@web3-react/core'
@@ -6,6 +6,7 @@ import { injectedConnector } from '../web3/injector-connector'
 import Web3 from 'web3'
 import { MainButton } from '../components/Buttons'
 import PageContainer from '../components/layout/PageContainer'
+import LoadingPanel from '../components/LoadingPanel'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -29,6 +30,8 @@ const WelcomePage: React.FC = () => {
   const history = useHistory()
   const { activate, active } = useWeb3React<Web3>()
 
+  const [isLoading, setLoading] = useState(false)
+
   useEffect(() => {
     if (active) {
       history.push('/list')
@@ -36,7 +39,8 @@ const WelcomePage: React.FC = () => {
   }, [history, active])
 
   const handleStart = () => {
-    activate(injectedConnector).then()
+    setLoading(true)
+    activate(injectedConnector).finally(() => setLoading(false))
   }
 
   return (
@@ -53,7 +57,9 @@ const WelcomePage: React.FC = () => {
         The easiest and quickest way to manage and pay your contacts. Connect
         your wallet to begin.
       </Typography>
-      <MainButton onClick={handleStart}>Connect Wallet</MainButton>
+      <LoadingPanel isLoading={isLoading} message={'connecting to wallet'}>
+        <MainButton onClick={handleStart}>Connect Wallet</MainButton>
+      </LoadingPanel>
     </PageContainer>
   )
 }
