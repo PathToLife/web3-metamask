@@ -16,6 +16,7 @@ const PageContainer = withStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    maxWidth: theme.breakpoints.values.sm,
   },
 }))(MuiContainer)
 export default PageContainer
