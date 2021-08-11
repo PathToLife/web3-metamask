@@ -1,53 +1,26 @@
 import React, { useEffect, useMemo } from 'react'
 import { useWeb3React } from '@web3-react/core'
-import { Button, Container, makeStyles, Typography } from '@material-ui/core'
-import { InjectedConnector } from '@web3-react/injected-connector'
+import { Button, Typography } from '@material-ui/core'
 import { toast } from 'react-toastify'
 import Web3 from 'web3'
+import { Route, Switch, useHistory } from 'react-router-dom'
+import PageContainer from '../components/layout/PageContainer'
+import ContactAddPage from './Contacts/ContactAddPage'
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    paddingTop: theme.spacing(10),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-}))
-
-/* Chain IDs
-Mainnet : Ethereum main network
-chain_id: 1
-Ropsten : Ethereum test network (PoW)
-chain_id: 3
-Rinkeby : Ethereum test network (PoA)
-chain_id: 4
-Kovan : Ethereum test network (PoA)
-chain_id: 42
-*/
-
-const injector = new InjectedConnector({
-  supportedChainIds: [1, 3, 4, 42],
-})
-
-export const AppPage: React.FC = () => {
-  const classes = useStyles()
-
-  const { activate, error, account, library } = useWeb3React<Web3>()
-
-  useEffect(() => {
-    activate(injector)
-  }, [activate])
-
-  useEffect(() => {
-    if (!error) return
-    toast.error(error.message)
-  }, [error])
+const AppPage: React.FC = () => {
+  const history = useHistory()
+  const { error, account, library } = useWeb3React<Web3>()
 
   const accountAddress = useMemo(() => {
     if (!account) return 'Metamask connection required'
 
     return account
   }, [account])
+
+  useEffect(() => {
+    if (!error) return
+    toast.error(error.message)
+  }, [error])
 
   const handleSend = () => {
     if (!account) return
@@ -62,10 +35,16 @@ export const AppPage: React.FC = () => {
   }
 
   return (
-    <Container maxWidth={'sm'} className={classes.container}>
+    <PageContainer>
       <Typography variant={'h2'}>AppPage</Typography>
       <Typography variant={'body1'}>{accountAddress}</Typography>
       <Button onClick={handleSend}>Send</Button>
-    </Container>
+      <Switch>
+        <Route exact path={'/'} />
+        <Route path={'/add'} component={ContactAddPage} />
+      </Switch>
+    </PageContainer>
   )
 }
+
+export default AppPage

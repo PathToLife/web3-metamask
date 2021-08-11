@@ -1,44 +1,61 @@
-import React from 'react'
-import { Button, Container, makeStyles, Typography } from '@material-ui/core'
+import React, { useEffect } from 'react'
+import { makeStyles, Typography } from '@material-ui/core'
 import { useHistory } from 'react-router'
+import { useWeb3React } from '@web3-react/core'
+import { injectedConnector } from '../web3/injector-connector'
+import Web3 from 'web3'
+import { MainButton } from '../components/Buttons'
+import PageContainer from '../components/layout/PageContainer'
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    paddingTop: theme.spacing(10),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '80vh',
   },
-  button: {
+  text: {
     marginTop: theme.spacing(2),
-    width: 150,
+  },
+  logo: {
+    width: '50%',
   },
 }))
 
-export const WelcomePage: React.FC = () => {
+const WelcomePage: React.FC = () => {
   const classes = useStyles()
 
   const history = useHistory()
+  const { activate, active } = useWeb3React<Web3>()
+
+  useEffect(() => {
+    if (active) {
+      history.push('/list')
+    }
+  }, [history, active])
 
   const handleStart = () => {
-    history.push('/app')
+    activate(injectedConnector).then()
   }
 
   return (
-    <Container maxWidth={'sm'} className={classes.container}>
-      <Typography align="center" variant={'h2'}>
-        Metamask
+    <PageContainer className={classes.container}>
+      <img
+        src={'/images/metamask-fox.svg'}
+        alt={'logo'}
+        className={classes.logo}
+      />
+      <Typography align="center" variant={'h5'}>
+        Crypto address book
       </Typography>
-      <Typography align="center" variant={'h4'}>
-        Test App
+      <Typography align="center" variant={'body1'} className={classes.text}>
+        The easiest and quickest way to manage and pay your contacts. Connect
+        your wallet to begin.
       </Typography>
-      <Button
-        variant={'contained'}
-        className={classes.button}
-        onClick={handleStart}
-      >
-        Start
-      </Button>
-    </Container>
+      <MainButton onClick={handleStart}>Connect Wallet</MainButton>
+    </PageContainer>
   )
 }
+
+export default WelcomePage
