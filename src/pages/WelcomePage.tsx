@@ -4,7 +4,7 @@ import { useHistory } from 'react-router'
 import { useWeb3React } from '@web3-react/core'
 import { injectedConnector } from '../web3/injector-connector'
 import Web3 from 'web3'
-import { MainButton } from '../components/Buttons'
+import { PrimaryButton } from '../components/Buttons'
 import PageContainer from '../components/layout/PageContainer'
 import LoadingPanel from '../components/LoadingPanel'
 import { routePaths } from './Router'
@@ -65,7 +65,7 @@ const WelcomePage: React.FC = () => {
         your wallet to begin.
       </Typography>
       <LoadingPanel isLoading={isLoading} message={'connecting to wallet'}>
-        <MainButton onClick={handleStart}>Connect Wallet</MainButton>
+        <PrimaryButton onClick={handleStart}>Connect Wallet</PrimaryButton>
       </LoadingPanel>
     </PageContainer>
   )
