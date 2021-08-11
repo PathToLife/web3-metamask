@@ -1,8 +1,9 @@
 import React from 'react'
 import { IconButton, makeStyles, Typography } from '@material-ui/core'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
+import clsx from 'clsx'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   container: {
     display: 'flex',
     flexDirection: 'row',
@@ -23,16 +24,18 @@ interface PageHeaderProps {
   onBack: () => void
   title: string
   rightSize?: JSX.Element
+  className?: string
 }
 
 export const PageHeader: React.FC<PageHeaderProps> = ({
   onBack,
   title,
   rightSize,
+  className,
 }) => {
   const classes = useStyles()
   return (
-    <div className={classes.container}>
+    <div className={clsx(classes.container, className)}>
       <IconButton
         size={'medium'}
         onClick={onBack}
