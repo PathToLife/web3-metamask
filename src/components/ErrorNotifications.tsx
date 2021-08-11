@@ -4,7 +4,7 @@ import { NoEthereumProviderError } from '@web3-react/injected-connector'
 import Web3 from 'web3'
 import { toast } from 'react-toastify'
 
-const ErrorNotifications = () => {
+const ErrorNotifications: React.FC = () => {
   const { error } = useWeb3React<Web3>()
 
   useEffect(() => {
