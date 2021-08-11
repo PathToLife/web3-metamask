@@ -5,7 +5,7 @@ import { themes } from './styles/theme'
 import { CssBaseline, ThemeProvider } from '@material-ui/core'
 import { AppContext } from './context/AppContext'
 import ErrorNotifications from './components/ErrorNotifications'
-import AppRouter from './Router'
+import AppRouter from './pages/Router'
 
 const AppContextThemeProvider: React.FC = ({ children }) => {
   return (

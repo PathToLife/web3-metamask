@@ -24,6 +24,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
+const redirectPathOnConnect = '/list'
+
 const WelcomePage: React.FC = () => {
   const classes = useStyles()
 
@@ -31,15 +33,21 @@ const WelcomePage: React.FC = () => {
   const { activate, active } = useWeb3React<Web3>()
 
   const [isLoading, setLoading] = useState(false)
+  const [redirectOnSuccess, setRedirectOnSuccess] = useState(false)
 
   useEffect(() => {
-    if (active) {
-      history.push('/list')
+    if (active && redirectOnSuccess) {
+      history.push(redirectPathOnConnect)
     }
-  }, [history, active])
+  }, [history, active, redirectOnSuccess])
 
   const handleStart = () => {
+    if (active) {
+      history.push(redirectPathOnConnect)
+      return
+    }
     setLoading(true)
+    setRedirectOnSuccess(true)
     activate(injectedConnector).finally(() => setLoading(false))
   }
 

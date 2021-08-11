@@ -1,8 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import WelcomePage from './pages/WelcomePage'
-import AppPage from './pages/AppPage'
-import AddressBookPage from './pages/Contacts/AddressBookPage'
+import WelcomePage from './WelcomePage'
+import TestPage from './TestPage'
+import AddressBookPage from './Contacts/AddressBookPage'
 
 const AppRouter: React.FC = () => {
   return (
@@ -11,8 +11,8 @@ const AppRouter: React.FC = () => {
         <Route path={'/'} exact>
           <WelcomePage />
         </Route>
-        <Route path={'/app'}>
-          <AppPage />
+        <Route path={'/test'}>
+          <TestPage />
         </Route>
         <Route path={'/list'}>
           <AddressBookPage />

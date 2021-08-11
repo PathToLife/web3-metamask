@@ -7,7 +7,7 @@ import { Route, Switch, useHistory } from 'react-router-dom'
 import PageContainer from '../components/layout/PageContainer'
 import ContactAddPage from './Contacts/ContactAddPage'
 
-const AppPage: React.FC = () => {
+const TestPage: React.FC = () => {
   const history = useHistory()
   const { error, account, library } = useWeb3React<Web3>()
 
@@ -47,4 +47,4 @@ const AppPage: React.FC = () => {
   )
 }
 
-export default AppPage
+export default TestPage
