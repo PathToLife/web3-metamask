@@ -3,7 +3,7 @@ import PageContainer from '../../components/layout/PageContainer'
 import { PageHeader } from '../../components/layout/PageHeader'
 import { useHistory } from 'react-router'
 import { routePaths } from '../Router'
-import { SecondaryButton } from '../../components/Buttons'
+import { StyledOutlinedButton } from '../../components/Buttons'
 import AppContext from '../../context/AppContext'
 import { useRouterContactLoader } from '../../hooks/useContacts'
 import ContactForm from '../../components/ContactForm'
@@ -50,7 +50,9 @@ const ContactEditPage: React.FC = () => {
         onChange={setContact}
         onSubmit={handleEditSave}
       >
-        <SecondaryButton onClick={handleDelete}>Delete Contact</SecondaryButton>
+        <StyledOutlinedButton onClick={handleDelete}>
+          Delete Contact
+        </StyledOutlinedButton>
       </ContactForm>
     </PageContainer>
   )

@@ -6,10 +6,14 @@ import { makeStyles } from '@material-ui/core'
 import { useWeb3React } from '@web3-react/core'
 import Web3 from 'web3'
 import { PrimaryButton } from './Buttons'
+import clsx from 'clsx'
 
 const useStyles = makeStyles((theme) => ({
   textField: {
     marginTop: theme.spacing(2),
+  },
+  narrowMarginTop: {
+    marginTop: theme.spacing(1),
   },
 }))
 
@@ -116,6 +120,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
       <PrimaryButton
         onClick={handleSubmit}
         disabled={!!nameInputError || !!ethAddressError}
+        className={clsx(!!children && classes.narrowMarginTop)}
       >
         Save
       </PrimaryButton>
