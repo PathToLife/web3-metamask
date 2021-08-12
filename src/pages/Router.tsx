@@ -28,7 +28,7 @@ const AppRouter: React.FC = () => {
   return (
     <Router>
       <Switch>
-        <Route exact path={root}>
+        <Route exact path={routePaths.welcome}>
           <WelcomePage />
         </Route>
         <Route path={routePaths.test}>
