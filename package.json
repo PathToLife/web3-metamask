@@ -30,9 +30,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "format": "prettier --write src/**/*.{ts,js,tsx}",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "format": "prettier --write src/**/*.{ts,js,tsx}"
   },
   "eslintConfig": {
     "extends": [
